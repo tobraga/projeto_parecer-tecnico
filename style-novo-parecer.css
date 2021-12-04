@@ -1,0 +1,242 @@
+:root{
+
+    --vw: 1200px;
+    --altura-campo: 50px;
+
+}
+
+html{
+
+    background-color: rgb(240, 240, 240);
+
+}
+
+*{
+
+    font-family: 'Oswald';
+    margin: 0;
+    padding: 0;
+
+}
+
+body{
+
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+
+}
+
+header{
+
+    box-sizing: border-box;
+    height: 10vh;
+    width: var(--vw);
+    
+}
+
+    #logo-censipam{
+        
+        width: 100px;
+
+    }
+
+#titulo{
+
+    font-size: 3em;
+    font-weight: 600;
+    margin: 10px;
+
+}
+
+.form-container{
+
+    width: var(--vw);
+    
+}
+
+    .informacoes{
+
+        background-color: white;
+        border-radius: 18px;
+        box-shadow: rgba(0, 0, 0, 0.205) 0 0 10px;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        height: 350px;
+        margin-bottom: 50px;
+        overflow: hidden;
+        padding: 2%;
+        position: relative;
+        width: 100%;
+
+    }
+
+
+        form{
+
+            padding-left: 50px;
+
+        }
+
+        #form-item{
+            
+            display: grid;
+            grid-template: 1fr 1fr / 1fr 1fr;
+            height: 200px;
+            box-sizing: content-box;
+
+        }
+
+            #form-item .box{
+
+                margin: 0;
+
+            }
+
+            .box{
+
+                display: flex;
+                flex-direction: column;
+                margin: 10px 0;
+                position: relative;
+                width: max-content;
+
+            }
+
+            select{
+
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                appearance:none;   
+                background: url(./imgs/icons/caret-down.png) no-repeat right 50%;
+                text-indent: 12px;
+
+            }
+
+            .nome_campo{
+
+                display: inline;
+                font-size: 25px;    
+                font-weight: 500;
+
+            }
+
+                .campo{
+
+                    border: solid 2px #b8b8b8;
+                    border-radius: 8px;
+                    color: rgba(0, 0, 0, 0.692);
+                    font-size: 20px;
+                    height: 40px;
+                    outline: none;
+
+                }
+
+                    #campo-texto, #campo-origem{
+
+                        background-color: white;
+                        border-radius: 8px;
+
+                    }
+
+                    #campo-texto{
+
+                        width: 400px;
+
+                    }
+
+                    #campo-origem{
+
+                        width: 200px;
+
+                    }
+
+                    #campo-numParecer{
+
+                        text-align: center;
+
+                    }
+
+                    #campo-data{
+
+                        background: none;
+                        text-align: end;
+                        width: 150px;
+
+                    }
+
+                    #campo-data, #campo-numParecer{
+
+                        border-radius: 10px;
+
+                    }
+
+                    #campo-sn{
+
+                        width: 200px;
+
+                    }
+
+                .boxes{
+
+                    display: grid;
+                    grid-template: 1fr / 1fr 1fr;
+                    width: 50%;
+
+                }
+
+
+
+        .ilustracao{
+
+            background-color: #45e0d1;
+            bottom: 0;
+            height: 100%;
+            position: absolute;
+            right: 0;
+            text-align: center;
+            width: 400px;
+
+        }
+            #maintenance{
+
+                width: 300px;
+                z-index: 2;
+
+            }
+
+            svg{
+
+                position: absolute;
+                left: -130%;
+                transform: rotate(270deg) scale(0.7);
+
+            }
+
+
+    .box-item{
+
+        background-color: #ffffff;
+        box-shadow: rgba(0, 0, 0, 0.205) 0 0 10px;
+        border-radius: 18px;
+        display: flex;
+        flex-direction: column;
+        height: 250px;
+        margin: 25px 0 ;
+        overflow: hidden;
+        width: var(--vw);
+
+    }
+
+        .parte-superior-box-item{
+
+            background-color: #45e0d1;  
+            padding-left: 18px;
+            height: 50px;
+            width: 100%;
+
+        }
+
+
