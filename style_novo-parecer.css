@@ -1,0 +1,23 @@
+@font-face {
+  font-family: Nunito;
+  src: url(./fonts/Nunito-Regular.ttf); }
+* {
+  font-family: Nunito;
+  margin: 0;
+  padding: 0; }
+
+html {
+  background-color: #f0f0f0; }
+
+body {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 100vh; }
+
+header {
+  box-sizing: border-box;
+  height: 10vh;
+  width: var(--vw); }
+
+/*# sourceMappingURL=style_novo-parecer.css.map */
