@@ -27,14 +27,23 @@
 
         <div class="informacoes">
 
-            <form autocomplete="off">
+            <form method ="POST">
                 
                 <div class="box">
                     <label class="nome_campo">Nome</label>
                     <select class="campo" id="campo-texto">
+                        <?php
+                            $consultaServidor = $conn->prepare("SELECT nome_servidor FROM servidor");
+                            $consultaServidor->execute();
 
-                        <option value=""></option>
-                        <option value=""></option>
+                            $consultaServidor = $consultaServidor->fetchAll();
+                            foreach($consultaServidor as $consultaServidor){
+                                ?>
+                                <option value="<?php echo $consultaServidor['nome_servidor']; ?>">
+                                    <?php echo $consultaServidor['nome_servidor']; ?>
+                                </option>
+                            <?php } ?>
+                            ?>
 
                     </select>
 
