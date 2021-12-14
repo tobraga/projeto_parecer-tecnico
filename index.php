@@ -18,7 +18,9 @@
         <img src="imgs/Logo-Censipam-PNG/LogoVertical/Logo1xCensipam-Positivo.png" alt="logo-censipam" id="logo-censipam">
 
     </header>
-
+    <?php
+        require_once('config/conexao.php');
+    ?>
 
 
     <h1 id="titulo">Novo Parecer</h1>
@@ -27,24 +29,25 @@
 
         <div class="informacoes">
 
-            <form method ="POST">
+            <form autocomplete="off">
                 
                 <div class="box">
                     <label class="nome_campo">Nome</label>
                     <select class="campo" id="campo-texto">
-                        <?php
-                            $consultaServidor = $conn->prepare("SELECT nome_servidor FROM servidor");
-                            $consultaServidor->execute();
+                        <option>Selecione um Servidor do CRBE</option>
 
+                        <!-- Consulta no banco - Nome dos servidores--->
+                        <?php
+                            $consultaServidor = $conn->prepare('SELECT * FROM servidor');
+                            $consultaServidor->execute();
                             $consultaServidor = $consultaServidor->fetchAll();
-                            foreach($consultaServidor as $consultaServidor){
-                                ?>
+                            foreach ($consultaServidor as $consultaServidor) {
+                            ?>
                                 <option value="<?php echo $consultaServidor['nome_servidor']; ?>">
                                     <?php echo $consultaServidor['nome_servidor']; ?>
                                 </option>
                             <?php } ?>
-                            ?>
-
+                        ?>
                     </select>
 
                 </div>
@@ -53,10 +56,20 @@
                     <label class="nome_campo">Origem</label>
                     <select class="campo" id="campo-origem"> 
 
-                        <option value=""></option>
-                        <option value=""></option>
-                        <option value=""></option>
-                        <option value=""></option>
+                    <option>Selecione Local</option>
+
+                        <!-- Consulta no banco - Localizacao--->
+                        <?php
+                            $consultaLocal = $conn->prepare("SELECT CONCAT(localizacao,' - ',setor) as local  FROM localizacao;");
+                            $consultaLocal->execute();
+                            $consultaLocal = $consultaLocal->fetchAll();
+                            foreach ($consultaLocal as $consultaLocal) {
+                            ?>
+                                <option value="<?php echo $consultaLocal['local']; ?>">
+                                    <?php echo $consultaLocal['local']; ?>
+                                </option>
+                            <?php } ?>
+                        ?>
 
                     </select>
                 </div>

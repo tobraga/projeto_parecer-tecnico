@@ -1,20 +1,12 @@
 <?php
-$conn = new PDO("mysql:localhost;dbname=parecerTecnico", "root", "");
+$username = 'root';
+$password= NULL;
 
-/*
-    #mysqli - dados para a conexão
-    $servidor = "localhost";
-    $usuario = "root";
-    $senha = "";
-    $database = "parecerTecnico";
+try {
+    $conn = new PDO('mysql:host=localhost;dbname=parecertecnico', $username, $password);
+      $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  } catch(PDOException $e) {
+      echo 'ERROR: ' . $e->getMessage();
+  }
 
-    #conexão
-    $conexao = mysqli_connect($servidor, $usuario, $senha, $database);
-
-    if($conexao){
-        echo "Conectado com sucesso!";
-    }else{
-        echo "Erro na conexão!";
-    }
-    */  
 ?>
