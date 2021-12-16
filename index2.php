@@ -22,6 +22,9 @@
     </header>
     <?php
         require_once('config/conexao.php');
+        require_once('config/painel.php');
+        Painel::alert('sucesso', ' Empréstimo Atualizado com sucesso!');
+        //header("Refresh:2; url='index2.php'");
 
         if(isset($_POST['enviar'])){
             $fk_servidor = $_POST['fk_servidor'];
@@ -42,71 +45,7 @@
 
     <h1 id="titulo">Novo Parecer</h1>
 
-    <div class="form-container">
-
-        <div class="informacoes">
-
-            <form action="post">
-                
-                <div class="box">
-                    <label class="nome_campo">Nome</label>
-                    <select class="campo" id="campo-texto" name="fk_servidor">
-                        <option>Selecione um Servidor do CRBE</option>
-
-                        <!-- Consulta no banco - Nome dos servidores--->
-                        <?php
-                            $consultaServidor = $conn->prepare('SELECT * FROM servidor');
-                            $consultaServidor->execute();
-                            $consultaServidor = $consultaServidor->fetchAll();
-                            foreach ($consultaServidor as $consultaServidor) {
-                            ?>
-                                <option value="<?php echo $consultaServidor['id_servidor']; ?>">
-                                    <?php echo $consultaServidor['nome_servidor']; ?>
-                                </option>
-                            <?php } ?>
-                        ?>
-                    </select>
-
-                </div>
-
-                <div class="box">
-                    <label class="nome_campo">Origem</label>
-                    <select class="campo" id="campo-origem" name="id_localizacao"> 
-
-                    <option>Selecione Local</option>
-
-                        <!-- Consulta no banco - Localizacao--->
-                        <?php
-                            $consultaLocal = $conn->prepare("SELECT id_localizacao, CONCAT(localizacao,' - ',setor) as local  FROM localizacao;");
-                            $consultaLocal->execute();
-                            $consultaLocal = $consultaLocal->fetchAll();
-                            foreach ($consultaLocal as $consultaLocal) {
-                            ?>
-                                <option value="<?php echo $consultaLocal['id_localizacao']; ?>">
-                                    <?php echo $consultaLocal['local']; ?>
-                                </option>
-                            <?php } ?>
-                        ?>
-
-                    </select>
-                </div>
-
-                <div class="boxes">
-
-                    <div class="box">
-                        <label class="nome_campo">Parecer Técnico N°</label>
-                        <input type="number" class="campo" id="campo-numParecer" name="id_parecer" required>
-                    </div>
-
-                    <div class="box">
-                        <label class="nome_campo">Data</label>
-                        <input type="date" class="campo" id="campo-data" name="data_teste" required>
-                    </div>
-                
-                </div>
-
-            </form>
-
+ 
             <div class="ilustracao">
 
                 <img src="./imgs/ilustracao/streamline-icon-maintenance@400x400.png" id="maintenance">
