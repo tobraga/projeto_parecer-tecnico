@@ -23,8 +23,19 @@
     <?php
         require_once('config/conexao.php');
 
-        if(isset($_POST['acao'])){
+        if(isset($_POST['enviar'])){
+            $fk_servidor = $_POST['fk_servidor'];
+            $id_localizacao = $_POST['id_localizacao'];
+            $id_parecer = $_POST['id_parecer'];
+            $data_teste = $_POST['data_teste'];
+            $fk_equipamento = $_POST['fk_equipamento'];
+            $status_parecer = $_POST['status_parecer'];
+            $numero_patrimonio = $_POST['numero_patrimonio'];
+            $numero_serie = $_POST['numero_serie'];
 
+            $cadastroParecer = $conn->prepare("INSERT INTO parecer_tecnico (numero_patrimonio, numero_serie, status_parecer, data_teste, fk_equipamento, fk_localizacao, fk_servidor)
+            VALUES ('$numero_patrimonio','$numero_serie', '$status_parecer','$data_teste','$fk_equipamento','$id_localizacao', '$fk_servidor')");
+            $cadastroParecer->execute();
         }
     ?>
 
@@ -35,11 +46,11 @@
 
         <div class="informacoes">
 
-            <form autocomplete="off">
+            <form action="post">
                 
                 <div class="box">
                     <label class="nome_campo">Nome</label>
-                    <select class="campo" id="campo-texto" name="servidor">
+                    <select class="campo" id="campo-texto" name="fk_servidor">
                         <option>Selecione um Servidor do CRBE</option>
 
                         <!-- Consulta no banco - Nome dos servidores--->
@@ -49,7 +60,7 @@
                             $consultaServidor = $consultaServidor->fetchAll();
                             foreach ($consultaServidor as $consultaServidor) {
                             ?>
-                                <option value="<?php echo $consultaServidor['nome_servidor']; ?>">
+                                <option value="<?php echo $consultaServidor['id_servidor']; ?>">
                                     <?php echo $consultaServidor['nome_servidor']; ?>
                                 </option>
                             <?php } ?>
@@ -60,18 +71,18 @@
 
                 <div class="box">
                     <label class="nome_campo">Origem</label>
-                    <select class="campo" id="campo-origem" name="local"> 
+                    <select class="campo" id="campo-origem" name="id_localizacao"> 
 
                     <option>Selecione Local</option>
 
                         <!-- Consulta no banco - Localizacao--->
                         <?php
-                            $consultaLocal = $conn->prepare("SELECT CONCAT(localizacao,' - ',setor) as local  FROM localizacao;");
+                            $consultaLocal = $conn->prepare("SELECT id_localizacao, CONCAT(localizacao,' - ',setor) as local  FROM localizacao;");
                             $consultaLocal->execute();
                             $consultaLocal = $consultaLocal->fetchAll();
                             foreach ($consultaLocal as $consultaLocal) {
                             ?>
-                                <option value="<?php echo $consultaLocal['local']; ?>">
+                                <option value="<?php echo $consultaLocal['id_localizacao']; ?>">
                                     <?php echo $consultaLocal['local']; ?>
                                 </option>
                             <?php } ?>
@@ -84,12 +95,12 @@
 
                     <div class="box">
                         <label class="nome_campo">Parecer Técnico N°</label>
-                        <input type="number" class="campo" id="campo-numParecer" name="parecer" required>
+                        <input type="number" class="campo" id="campo-numParecer" name="id_parecer" required>
                     </div>
 
                     <div class="box">
                         <label class="nome_campo">Data</label>
-                        <input type="date" class="campo" id="campo-data" name="data" required>
+                        <input type="date" class="campo" id="campo-data" name="data_teste" required>
                     </div>
                 
                 </div>
@@ -125,17 +136,17 @@
                     <div class="box">
 
                         <label class="nome_campo">Equipamento</label>
-                        <select class="campo" id="campo-texto" name="servidor">
+                        <select class="campo" id="campo-texto" name="fk_equipamento">
                             <option>Selecione um Equipamento</option>
 
                             <!-- Consulta no banco - Nome dos servidores--->
                             <?php
-                                $consultaEquipamento = $conn->prepare("SELECT id_patrimonio, CONCAT(descricao,' - ',marca,' - ',modelo) as equipamento  FROM patrimonio;");
+                                $consultaEquipamento = $conn->prepare("SELECT id_equipamento, CONCAT(descricao,' - ',marca,' - ',modelo) as equipamento  FROM equipamento;");
                                 $consultaEquipamento->execute();
                                 $consultaEquipamento = $consultaEquipamento->fetchAll();
                                 foreach ($consultaEquipamento as $consultaEquipamento) {
                                 ?>
-                                    <option value="<?php echo $consultaEquipamento['equipamento']; ?>">
+                                    <option value="<?php echo $consultaEquipamento['id_equipamento']; ?>">
                                         <?php echo $consultaEquipamento['equipamento']; ?>
                                     </option>
                                 <?php } ?>
@@ -147,7 +158,7 @@
                     <div class="box">
 
                         <label class="nome_campo">Status</label>
-                        <select class="campo" id="campo-texto" name="stts">
+                        <select class="campo" id="campo-texto" name="status_parecer">
                             <option>Selecione um Status</option>
                             <option>Bom</option>
                             <option>Ocioso</option>
@@ -158,14 +169,14 @@
                     <div class="box">
 
                         <label class="nome_campo">SN</label>
-                        <input type="text" class="campo" id="sn" required>
+                        <input type="text" class="campo" id="numero_serie" name="numero_serie" required>
 
                     </div>
 
                     <div class="box">
 
                         <label class="nome_campo">Patrimônio</label>
-                        <input type="text" class="campo" id="patrimonio" required>
+                        <input type="text" class="campo" id="numero_patrimonio" name="numero_patrimonio" required>
 
                     </div>
 
