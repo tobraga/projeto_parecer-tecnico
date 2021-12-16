@@ -7,6 +7,8 @@
     <title>Document</title>
 
     <link rel="stylesheet" href="./style-novo-parecer.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
     <script src="./script.js" defer></script>
 
 </head>
@@ -20,6 +22,10 @@
     </header>
     <?php
         require_once('config/conexao.php');
+
+        if(isset($_POST['acao'])){
+
+        }
     ?>
 
 
@@ -33,7 +39,7 @@
                 
                 <div class="box">
                     <label class="nome_campo">Nome</label>
-                    <select class="campo" id="campo-texto">
+                    <select class="campo" id="campo-texto" name="servidor">
                         <option>Selecione um Servidor do CRBE</option>
 
                         <!-- Consulta no banco - Nome dos servidores--->
@@ -54,7 +60,7 @@
 
                 <div class="box">
                     <label class="nome_campo">Origem</label>
-                    <select class="campo" id="campo-origem"> 
+                    <select class="campo" id="campo-origem" name="local"> 
 
                     <option>Selecione Local</option>
 
@@ -78,12 +84,12 @@
 
                     <div class="box">
                         <label class="nome_campo">Parecer Técnico N°</label>
-                        <input type="number" class="campo" id="campo-numParecer">
+                        <input type="number" class="campo" id="campo-numParecer" name="parecer" required>
                     </div>
 
                     <div class="box">
                         <label class="nome_campo">Data</label>
-                        <input type="date" class="campo" id="campo-data">
+                        <input type="date" class="campo" id="campo-data" name="data" required>
                     </div>
                 
                 </div>
@@ -114,38 +120,59 @@
                 
                 </div>
 
-                <form action="" id="form-item">
+                <form action="post" id="form-item">
 
                     <div class="box">
 
                         <label class="nome_campo">Equipamento</label>
-                        <input class="campo" id="campo-texto">
+                        <select class="campo" id="campo-texto" name="servidor">
+                            <option>Selecione um Equipamento</option>
+
+                            <!-- Consulta no banco - Nome dos servidores--->
+                            <?php
+                                $consultaEquipamento = $conn->prepare("SELECT id_patrimonio, CONCAT(descricao,' - ',marca,' - ',modelo) as equipamento  FROM patrimonio;");
+                                $consultaEquipamento->execute();
+                                $consultaEquipamento = $consultaEquipamento->fetchAll();
+                                foreach ($consultaEquipamento as $consultaEquipamento) {
+                                ?>
+                                    <option value="<?php echo $consultaEquipamento['equipamento']; ?>">
+                                        <?php echo $consultaEquipamento['equipamento']; ?>
+                                    </option>
+                                <?php } ?>
+                            ?>
+                    </select>
 
                     </div>
 
                     <div class="box">
 
                         <label class="nome_campo">Status</label>
-                        <input type="text" class="campo" id="status">
-
+                        <select class="campo" id="campo-texto" name="stts">
+                            <option>Selecione um Status</option>
+                            <option>Bom</option>
+                            <option>Ocioso</option>
+                            <option>Antieconomico</option>
+                        </select>
                     </div>
 
                     <div class="box">
 
                         <label class="nome_campo">SN</label>
-                        <input type="text" class="campo" id="sn">
+                        <input type="text" class="campo" id="sn" required>
 
                     </div>
 
                     <div class="box">
 
                         <label class="nome_campo">Patrimônio</label>
-                        <input type="text" class="campo" id="patrimonio">
+                        <input type="text" class="campo" id="patrimonio" required>
 
                     </div>
 
                     
-
+                    <div class="d-grid gap-2 d-md-block">
+                        <button class="btn btn-primary" type="button" name="enviar">Button</button>
+                    </div>
                 </form>
 
                 
